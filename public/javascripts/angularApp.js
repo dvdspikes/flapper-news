@@ -68,6 +68,9 @@ function($scope, posts, auth){
 	$scope.incrementUpvotes = function(post) {
 		posts.upvote(post);
 	};
+	$scope.checkScope = function() {
+		window.alert("checkScope");
+	}
 }]);
 
 app.controller('PostsCtrl', [
@@ -218,3 +221,18 @@ app.factory('auth', ['$http', '$window', function($http, $window) {
 
 	return auth;
 }]);
+
+app.directive('checkAuth', function() {
+	return {
+		restrict: 'E',
+		scope: {},
+		template: '\
+			<div ng-hide="isLoggedIn()">\
+			  <h3>You need to <a ui-sref="login">Log In</a> or <a ui-sref="register">Register</a> before you can comment.</h3>\
+			</div>\
+		',
+		controller: ['$scope', 'auth', function($scope, auth) {
+			$scope.isLoggedIn = auth.isLoggedIn;
+		}]
+	};
+});

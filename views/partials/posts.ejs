@@ -35,6 +35,4 @@
   <button type="submit" class="btn btn-primary">Post</button>
 </form>
 
-<div ng-hide="isLoggedIn()">
-  <h3>You need to <a ui-sref="login">Log In</a> or <a ui-sref="register">Register</a> before you can comment.</h3>
-</div>
+<check-auth></check-auth>
